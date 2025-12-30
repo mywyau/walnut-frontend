@@ -5,7 +5,7 @@ const route = useRoute()
 const level = route.params.level as string
 
 const { data: index, error } = await useFetch(
-  `/indexes/hsk/${level}.json`,
+  `/index/hsk/${level}.json`,
   {
     key: `hsk-${level}`,
     server: false
@@ -28,9 +28,7 @@ const { data: index, error } = await useFetch(
       <ul class="space-y-4">
         <li v-for="item in index.items" :key="item.id" class="border-b pb-3">
           <NuxtLink :to="`/item/${item.id}`" class="block hover:bg-gray-50 rounded p-2">
-            <div class="text-lg">
-              {{ item.sentence }}
-            </div>
+            <RubyText :text="item.sentence" :ruby="item.jyutping" />
             <div class="text-sm text-gray-500">
               {{ item.english }}
             </div>

@@ -26,10 +26,6 @@
             HSK
           </NuxtLink>
 
-          <NuxtLink to="/item/" class="text-l text-primary-600">
-            Item
-          </NuxtLink>
-
           <span class="text-gray-700">{{ user?.name }}</span>
 
           <Button variant="danger" @click="logout">
