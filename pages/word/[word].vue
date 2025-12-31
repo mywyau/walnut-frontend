@@ -4,7 +4,7 @@ const route = useRoute()
 const wordParam = computed(() => route.params.word as string)
 
 const { data: word, error, pending } = await useFetch(
-  () => `/api/words/${encodeURIComponent(wordParam.value)}`,
+  () => `/api/words/${decodeURIComponent(wordParam.value)}`,
   {
     key: () => `word-${wordParam.value}`,
     server: true
