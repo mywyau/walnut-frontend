@@ -3,7 +3,8 @@ const route = useRoute()
 
 const wordParam = computed(() => route.params.word as string)
 
-const { data: word, error, pending } = await useFetch(() => `/api/words/${wordParam.value}`,
+const { data: word, error, pending } = await useFetch(
+  () => `/api/words/${encodeURIComponent(wordParam.value)}`,
   {
     key: () => `word-${wordParam.value}`,
     server: true
@@ -11,16 +12,18 @@ const { data: word, error, pending } = await useFetch(() => `/api/words/${wordPa
 )
 
 // Only throw once we KNOW it failed
-watchEffect(() => {
-  if (!pending.value && error.value) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Word not found'
-    })
-  }
-})
+// watchEffect(() => {
+//   if (!pending.value && error.value) {
+//     throw createError({
+//       statusCode: 404,
+//       statusMessage: 'Word not found'
+//     })
+//   }
+// })
 
+const notFound = computed(() => error.value?.statusCode === 404)
 const safeWord = computed(() => word.value)
+
 </script>
 
 
