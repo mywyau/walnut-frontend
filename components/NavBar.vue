@@ -17,16 +17,20 @@
         </Button> -->
 
         <div class="flex items-center gap-4">
-          
+
+          <NuxtLink to="/topics" class="text-l text-primary-600">
+            Topics
+          </NuxtLink>
+
           <NuxtLink to="/hsk" class="text-l text-primary-600">
             HSK
           </NuxtLink>
 
           <span class="text-gray-700">{{ user?.name }}</span>
-
+<!-- 
           <Button variant="danger" @click="logout">
             Logout
-          </Button>
+          </Button> -->
         </div>
 
       </div>

@@ -5,10 +5,10 @@
     </p>
 
     <NuxtLink
-      to="/module/daily"
+      to="/topics"
       class="inline-block px-4 py-2 border rounded"
     >
-      Start with daily speech →
+      Start with some basic topics →
     </NuxtLink>
   </main>
 </template>
