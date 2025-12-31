@@ -25,7 +25,7 @@ const safeWord = computed(() => word.value)
 
 
 <template>
-  <main class="max-w-2xl mx-auto px-4 py-12 space-y-10">
+  <main v-if="safeWord" class="max-w-2xl mx-auto px-4 py-12 space-y-10">
     <!-- Word header -->
     <section class="text-center space-y-2">
       <div class="text-4xl font-medium">
