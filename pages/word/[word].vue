@@ -39,7 +39,7 @@ const safeWord = computed(() => word.value!)
         {{ safeWord.meaning }}
       </div>
 
-      <AudioButton :src="`/audio/words/${safeWord.word}.mp3`" />
+      <AudioButton :src="`/audio/words/${safeWord.id}.mp3`" />
     </section>
 
     <!-- Usage notes -->
