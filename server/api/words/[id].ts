@@ -1,21 +1,15 @@
-import { readFile } from 'fs/promises'
-import { join } from 'path'
-
 export default defineEventHandler(async (event) => {
-  
-  const id = getRouterParam(event, 'id')
-
-  // const decodedParam = decodeURIComponent(id || "unable to decode character")  // TODO: we need to move to raw english and avoid encode and decoding
-
+  const id = getRouterParam(event, "id")
+  const origin = getRequestURL(event).origin;
+  console.log(`${origin}/content/cantonese/words/${id}.json`)
   try {
-    const file = join(process.cwd(), 'public/content/cantonese/words', `${id}.json`)
-    const json = await readFile(file, 'utf-8')
-    console.log(file)
-    return JSON.parse(json)
+    return await $fetch(
+      `${origin}/content/cantonese/words/${id}.json`
+    );
   } catch {
     throw createError({
       statusCode: 404,
-      statusMessage: 'Word not found'
-    })
+      statusMessage: "Word not found",
+    });
   }
-})
+});
