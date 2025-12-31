@@ -1,0 +1,14 @@
+{
+  "id": "measure-words",
+  "title": "Measure Words",
+  "description": "Common classifiers used in everyday spoken Cantonese.",
+  "words": [
+    "go3",
+    "zek3",
+    "gaa3"
+  ],
+  "phrases": [
+    "this_one_01",
+    "how_many_01"
+  ]
+}

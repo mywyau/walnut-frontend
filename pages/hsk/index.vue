@@ -25,8 +25,7 @@ const levels = [
     </h1>
 
     <p class="text-gray-600 mb-8">
-      Explore Cantonese sentence patterns organised by HSK level.
-      Use this as a guide, not a rule.
+      Explore Cantonese sentence patterns organised by HSK level
     </p>
 
     <ul class="space-y-4">

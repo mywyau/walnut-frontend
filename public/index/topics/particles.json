@@ -1,0 +1,16 @@
+{
+  "id": "particles",
+  "title": "Sentence-final Particles",
+  "description": "Common Cantonese particles that change tone, mood, and intent in spoken sentences.",
+  "words": [
+    "laa1",
+    "aa3",
+    "gaa3",
+    "wo3",
+    "ne1"
+  ],
+  "phrases": [
+    "eat_later_laa_01",
+    "dont_know_aa_01"
+  ]
+}

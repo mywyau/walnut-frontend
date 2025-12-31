@@ -1,0 +1,16 @@
+{
+  "id": "numbers",
+  "title": "Numbers",
+  "description": "Counting, prices, quantities, and amounts in spoken Cantonese.",
+  "words": [
+    "一",
+    "二",
+    "三",
+    "四",
+    "五",
+    "幾多"
+  ],
+  "phrases": [
+    "how_much_01"
+  ]
+}

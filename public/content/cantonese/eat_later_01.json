@@ -20,11 +20,13 @@
   "alternatives": [
     {
       "sentence": "我哋一陣先食",
+      "jyutping": "ngo5 dei6 jat1 zan6 sin1 sik6",
       "english": "We'll eat shortly",
       "note": "Used when the wait is short"
     },
     {
       "sentence": "我哋夜啲食",
+      "jyutping": "ngo5 dei6 je6 di1 sik6",
       "english": "We'll eat later in the evening",
       "note": "Specifies evening time"
     }

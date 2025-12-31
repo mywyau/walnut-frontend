@@ -17,11 +17,7 @@
         </Button> -->
 
         <div class="flex items-center gap-4">
-
-          <NuxtLink to="/modules" class="text-l text-primary-600">
-            Module 1
-          </NuxtLink>
-
+          
           <NuxtLink to="/hsk" class="text-l text-primary-600">
             HSK
           </NuxtLink>
