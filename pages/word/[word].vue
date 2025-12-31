@@ -3,9 +3,7 @@ const route = useRoute()
 
 const wordParam = computed(() => route.params.word as string)
 
-console.log(wordParam)
-
-const { data: word, error, pending } = await useFetch(`/api/words/${wordParam.value}`,
+const { data: word, error, pending } = await useFetch(() => `/api/words/${wordParam.value}`,
   {
     key: () => `word-${wordParam.value}`,
     server: true
