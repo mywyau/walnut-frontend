@@ -1,6 +1,5 @@
 <script setup lang="ts">
 defineProps<{
-  id: string
   word: string
   jyutping: string
   meaning: string
@@ -9,7 +8,8 @@ defineProps<{
 
 <template>
   <NuxtLink
-    :to="`/word/${id}`"
+    :to="`/word/${word}`"
+    external
     class="border rounded-lg p-4 hover:bg-gray-50 transition space-y-1"
   >
     <div class="text-xl text-center">

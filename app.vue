@@ -1,4 +1,4 @@
 <template>
   <NavBar />
-  <NuxtPage />
+  <NuxtPage :key="$route.fullPath" />
 </template>

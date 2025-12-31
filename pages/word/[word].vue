@@ -1,21 +1,18 @@
 <script setup lang="ts">
 const route = useRoute()
 
-// The Chinese word itself (e.g. 一, 唔知, 啦)
-const wordParam = route.params.word as string
+const wordParam = computed(() => route.params.word as string)
 
-const { data: word, error } = await useFetch(
-  `/content/cantonese/words/${wordParam}.json`,
+const { data: word, error, pending } = await useFetch(
+  () => `/api/words/${wordParam.value}`,
   {
-    key: `word-${wordParam}`,
-    server: false
+    key: () => `word-${wordParam.value}`
   }
 )
 
-console.log(`/content/cantonese/words/${wordParam}.json`)
-
+// Only throw once we KNOW it failed
 watchEffect(() => {
-  if (error.value) {
+  if (!pending.value && error.value) {
     throw createError({
       statusCode: 404,
       statusMessage: 'Word not found'
@@ -23,9 +20,9 @@ watchEffect(() => {
   }
 })
 
-
-const safeWord = computed(() => word.value!)
+const safeWord = computed(() => word.value)
 </script>
+
 
 <template>
   <main class="max-w-2xl mx-auto px-4 py-12 space-y-10">
@@ -43,7 +40,7 @@ const safeWord = computed(() => word.value!)
         {{ safeWord.meaning }}
       </div>
 
-      <AudioButton :src="`/audio/words/${safeWord.id}.mp3`" />
+      <AudioButton :src="`/audio/words/${safeWord.word}.mp3`" />
     </section>
 
     <!-- Usage notes -->
@@ -70,12 +67,13 @@ const safeWord = computed(() => word.value!)
         <li v-for="example in safeWord.examples ?? []" :key="example" class="border-l-4 border-gray-200 pl-4 pr-4 py-2">
           <div class="flex items-center justify-between gap-4">
             <span class="text-lg">
-              {{ example.word }}
+              {{ example }}
             </span>
-            
-            <AudioButton :src="`/audio/words/${example.id}.mp3`" />
+
+            <AudioButton :src="`/audio/words/${example}.mp3`" />
           </div>
         </li>
+
 
       </ul>
     </section>

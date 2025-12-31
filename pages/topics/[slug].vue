@@ -45,7 +45,6 @@ const safeTopic = computed(() => topic.value!)
         <WordTile
           v-for="item in section.items ?? []"
           :key="item.id"
-          :id="item.id"
           :word="item.word"
           :jyutping="item.jyutping"
           :meaning="item.meaning"
