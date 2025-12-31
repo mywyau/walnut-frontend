@@ -19,6 +19,7 @@ if (error.value || !word.value) {
   })
 }
 
+
 const safeWord = computed(() => word.value!)
 </script>
 
@@ -37,6 +38,8 @@ const safeWord = computed(() => word.value!)
       <div class="text-lg text-gray-600">
         {{ safeWord.meaning }}
       </div>
+
+      <AudioButton :src="`/audio/words/${safeWord.word}.mp3`" />
     </section>
 
     <!-- Usage notes -->
@@ -46,10 +49,7 @@ const safeWord = computed(() => word.value!)
       </h2>
 
       <ul class="list-disc pl-5 space-y-2 text-gray-700">
-        <li
-          v-for="note in safeWord.usage ?? []"
-          :key="note"
-        >
+        <li v-for="note in safeWord.usage ?? []" :key="note">
           {{ note }}
         </li>
       </ul>
@@ -62,12 +62,15 @@ const safeWord = computed(() => word.value!)
       </h2>
 
       <ul class="space-y-3">
-        <li
-          v-for="ex in safeWord.examples ?? []"
-          :key="ex"
-          class="border-l-4 border-gray-200 pl-4"
-        >
-          {{ ex }}
+
+        <li v-for="example in safeWord.examples ?? []" :key="example" class="border-l-4 border-gray-200 pl-4 pr-4 py-2">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-lg">
+              {{ example }}
+            </span>
+
+            <AudioButton :src="`/audio/words/${example}.mp3`" />
+          </div>
         </li>
       </ul>
     </section>

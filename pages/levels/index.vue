@@ -25,7 +25,7 @@ const levels = [
     </h1>
 
     <p class="text-gray-600 mb-8">
-      Explore Cantonese sentence patterns organised by Level  level
+      Explore Cantonese sentence patterns organised by Level
     </p>
 
     <ul class="space-y-4">
