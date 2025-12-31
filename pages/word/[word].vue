@@ -12,6 +12,8 @@ const { data: word, error } = await useFetch(
   }
 )
 
+console.log(`/content/cantonese/words/${wordParam}.json`)
+
 watchEffect(() => {
   if (error.value) {
     throw createError({
