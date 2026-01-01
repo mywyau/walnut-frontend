@@ -2,28 +2,24 @@
 import WordTile from '@/components/WordTile.vue'
 
 const route = useRoute()
-const slug = route.params.slug as string
 
-const { data: topic, error } = await useFetch(
-  `/index/topics/${slug}.json`,
+const slug = computed(() => route.params.slug as string)
+
+console.log(`/api/index/topics/${slug.value}`)
+
+const { data: topic, error, pending } = await useFetch(
+  () => `/api/index/topics/${slug.value}`,
   {
-    key: `topic-${slug}`
+    key: () => `topic-${slug.value}`,
+    server: true
   }
 )
 
-// Fail fast in SSR if missing
-if (error.value || !topic.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Topic not found'
-  })
-}
-
-const safeTopic = computed(() => topic.value!)
+const safeTopic = computed(() => topic.value)
 </script>
 
 <template>
-  <main class="max-w-4xl mx-auto px-4 py-12 space-y-8">
+  <main v-if="safeWord" class="max-w-4xl mx-auto px-4 py-12 space-y-8">
     <h1 class="text-3xl font-semibold">
       {{ safeTopic.title }}
     </h1>
@@ -32,23 +28,14 @@ const safeTopic = computed(() => topic.value!)
       {{ safeTopic.description }}
     </p>
 
-    <section
-      v-for="section in safeTopic.sections ?? []"
-      :key="section.title"
-      class="space-y-4"
-    >
+    <section v-for="section in safeTopic.sections ?? []" :key="section.title" class="space-y-4">
       <h2 class="text-lg font-semibold mt-8">
         {{ section.title }}
       </h2>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <WordTile
-          v-for="item in section.items ?? []"
-          :key="item.id"
-          :word="item.word"
-          :jyutping="item.jyutping"
-          :meaning="item.meaning"
-        />
+        <WordTile v-for="item in section.items ?? []" :key="item.id" :word="item.word" :jyutping="item.jyutping"
+          :meaning="item.meaning" />
       </div>
     </section>
 
@@ -58,4 +45,6 @@ const safeTopic = computed(() => topic.value!)
       </h2>
     </section>
   </main>
+
+
 </template>

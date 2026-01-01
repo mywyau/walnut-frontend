@@ -3,7 +3,6 @@ const route = useRoute()
 
 const wordParam = computed(() => route.params.word as string)
 
-
 const { data: word, error, pending } = await useFetch(
   () => `/api/words/numbers/${decodeURIComponent(wordParam.value)}`,
   {
@@ -11,8 +10,6 @@ const { data: word, error, pending } = await useFetch(
     server: true
   }
 )
-
-console.log(`/api/words/${decodeURIComponent(wordParam.value)}`)
 
 const notFound = computed(() => error.value?.statusCode === 404)
 const safeWord = computed(() => word.value)
