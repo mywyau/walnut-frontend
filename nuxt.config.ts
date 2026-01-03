@@ -28,3 +28,8 @@ export default defineNuxtConfig({
     },
   },
 });
+
+console.log(
+  "BUILD-TIME CDN ENV:",
+  process.env.NUXT_PUBLIC_CDN_BASE
+)
