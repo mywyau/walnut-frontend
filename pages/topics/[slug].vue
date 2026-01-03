@@ -7,12 +7,6 @@ const slug = computed(() => route.params.slug as string)
 
 const { public: { cdnBase } } = useRuntimeConfig();
 
-if (process.client) {
-  console.log("CDN URL:", `${cdnBase}/index/topics/${slug}.json`)
-}
-
-console.log(`/api/index/topics/${slug.value}`)
-
 const { data: topic, error, pending } = await useFetch(
   () => `/api/index/topics/${slug.value}`,
   {
