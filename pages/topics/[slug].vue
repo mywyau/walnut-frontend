@@ -5,17 +5,16 @@ const route = useRoute()
 
 const slug = computed(() => route.params.slug as string)
 
-const { public: { cdnBase } } = useRuntimeConfig();
-
 const { data: topic, error, pending } = await useFetch(
   () => `/api/index/topics/${slug.value}`,
   {
     key: () => `topic-${slug.value}`,
-    server: true
+    server: false
   }
 )
 
 const safeTopic = computed(() => topic.value)
+
 </script>
 
 <template>
