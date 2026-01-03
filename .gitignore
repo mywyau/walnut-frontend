@@ -25,3 +25,6 @@ logs
 
 # .vercel/ is a local metadata + cache directory
 .vercel
+.cloudflare
+
+

@@ -1,8 +1,5 @@
 export default defineEventHandler(async (event) => {
-  // max-age=3600	                Browser caches for 1 hour
-  // s-maxage=86400	              CDN caches for 24 hours
-  // stale-while-revalidate=600	  Serve stale for 10 mins while updating
-
+  
   const WORD_PATHS: Record<string, string> = {
     // units
     零: "units",
@@ -47,26 +44,22 @@ export default defineEventHandler(async (event) => {
     一百萬: "beyond",
   };
 
-  setHeader(
-    event,
-    "cache-control",
-    "public, max-age=3600, s-maxage=86400, stale-while-revalidate=600"
-  );
-
-  const id = getRouterParam(event, "id") || "no id or missing id";
-  const origin = getRequestURL(event).origin;
-
-  const folder = WORD_PATHS[id];
-
-  if (!folder) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: "Word not found",
-    });
+  const id = getRouterParam(event, "id");
+  if (!id) {
+    throw createError({ statusCode: 400, statusMessage: "Missing id" });
   }
 
+  const folder = WORD_PATHS[id];
+  if (!folder) {
+    throw createError({ statusCode: 404, statusMessage: "Word not found" });
+  }
+
+  const { public: { cdnBase } } = useRuntimeConfig();
+
   try {
-    return await $fetch(`${origin}/content/cantonese/words/numbers/${folder}/${id}.json`);
+    return await $fetch(
+      `${cdnBase}/content/cantonese/words/numbers/${folder}/${id}.json`
+    );
   } catch {
     throw createError({
       statusCode: 404,
